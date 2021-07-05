@@ -13,7 +13,7 @@ type Memory struct {
 func NewMemory() *Memory {
 	data := map[string]*domain.User{
 		"user001": domain.NewUser("user001", "John, Smith"),
-		"user002": domain.NewUser("user001", "Tarou, Yamada"),
+		"user002": domain.NewUser("user002", "Tarou, Yamada"),
 	}
 	return &Memory{data: data}
 }

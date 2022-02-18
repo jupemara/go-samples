@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cloudsql-proxy
+  namespace: cloudsql-proxy
+spec:
+  containers:
+    - name: workload-identity-test
+      image: google/cloud-sdk:slim
+      command: ['sleep', 'infinity']
+    - name: app
+      image: 'YOUR_IMAGE_URL'
+      ports:
+        - containerPort: 8080
+    - name: cloudsql-proxy
+      image: gcr.io/cloudsql-docker/gce-proxy:1.28.0
+      command:
+        - '/cloud_sql_proxy'
+        - '-instances=CONNECTION_STRING=tcp:3306'
+        - '-enable_iam_login'
+  serviceAccountName: cloudsql-proxy
+  nodeSelector:
+    iam.gke.io/gke-metadata-server-enabled: 'true'

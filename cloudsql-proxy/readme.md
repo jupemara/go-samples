@@ -47,3 +47,14 @@ $ gcloud iam service-accounts add-iam-policy-binding \
 
 - [ ] MySQL の IAM 自動認証がきたら再度検証
 - [ ] metadata から token 取得して 1 時間で refresh する (latency にシビアじゃないアプリならコレもあり)
+
+## 参考 URL
+
+- https://github.com/GoogleCloudPlatform/cloudsql-proxy/issues/984 `it is planned, but I'm not sure on the timeline.` だそうｗ
+- https://cloud.google.com/sql/docs/mysql/sql-proxy#user Cloud SQL Auth Proxy 専用のユーザ
+- https://cloud.google.com/docs/authentication/production Workload Identity の認証情報取得
+- https://cloud.google.com/sql/docs/mysql/authentication Cloud SQL IAM 認証
+- https://cloud.google.com/sql/docs/mysql/add-manage-iam-users
+- https://cloud.google.com/sql/docs/mysql/connect-kubernetes-engine#running_the_as_a_sidecar k8s の secret にぶちこんで認証する
+- https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#kubectl
+- https://cloud.google.com/docs/authentication/production いつものやつ。implicit に GCP の認証情報を取得する

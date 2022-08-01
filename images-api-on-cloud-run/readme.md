@@ -26,4 +26,6 @@ $ gcloud run deploy images-api-on-cloud-run \
 
 ## result
 
-`not an App Engine context` error message will be appeared on your screen...
+`service bridge HTTP failed: Post "http://appengine.googleapis.internal:10001/rpc_http": dial tcp 169.254.169.253:10001: i/o timeout`
+
+error on your browser

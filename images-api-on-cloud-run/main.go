@@ -1,28 +1,22 @@
 package main
 
 import (
-	"log"
 	"net/http"
 
-	"google.golang.org/appengine"
-	"google.golang.org/appengine/blobstore"
-	"google.golang.org/appengine/image"
+	"google.golang.org/appengine/v2"
+	"google.golang.org/appengine/v2/blobstore"
+	"google.golang.org/appengine/v2/image"
 )
 
 func main() {
-	m := http.NewServeMux()
-	m.HandleFunc("/", handler)
-	log.Println("starting the http server")
-	if err := http.ListenAndServe("0.0.0.0:8080", m); err != nil {
-		log.Fatalf("could not start the http server: %s", err)
-	}
-
+	http.HandleFunc("/", handler)
+	appengine.Main()
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	body := "URL: "
 	ctx := appengine.NewContext(r)
-	bk, err := blobstore.BlobKeyForFile(ctx, "/gs/images-api-sample/test.png")
+	bk, err := blobstore.BlobKeyForFile(ctx, "/gs/images-api-samples/test.png")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

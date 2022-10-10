@@ -1,0 +1,25 @@
+defaultService: https://www.googleapis.com/compute/v1/projects/virtual-gcp/global/backendServices/content-backend-for-sorry-verification
+kind: compute#urlMap
+name: sorry1
+hostRules:
+  - hosts:
+      - '*'
+    pathMatcher: path-matcher-1
+pathMatchers:
+  - defaultService: https://www.googleapis.com/compute/v1/projects/virtual-gcp/global/backendServices/content-backend-for-sorry-verification
+    name: path-matcher-1
+    routeRules:
+      - matchRules:
+          - prefixMatch: /
+            headerMatches:
+              - headerName: ABTest
+                exactMatch: A
+        priority: 0
+        service: https://www.googleapis.com/compute/v1/projects/virtual-gcp/global/backendServices/content-backend-for-sorry-verification
+      - matchRules:
+          - prefixMatch: /
+            headerMatches:
+              - headerName: X-Forwarded-For
+                prefixMatch: 8.8.8.8
+        priority: 1
+        service: https://www.googleapis.com/compute/v1/projects/virtual-gcp/global/backendBuckets/sorry-backend
